@@ -1,0 +1,23 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# CFD/generated outputs
+cases/
+results/
+geometry/generated/
+
+# Solver and mesh outputs
+*.su2
+*.msh
+*.vtk
+*.vtu
+*.csv
+*.log
+*.dat
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
