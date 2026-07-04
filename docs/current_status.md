@@ -153,6 +153,11 @@ MARS_project/
 - `wing_only_U30` 메쉬 생성 완료
 - `wing_only_U30` SU2 dry-run 통과
 - `wing_only_U30` SU2 Euler 200 iteration 실행 완료
+- `wing_cylinder_static_U30` 메쉬 생성 완료
+- `wing_cylinder_static_U30` SU2 dry-run 통과
+- `wing_cylinder_static_U30` SU2 Euler 200 iteration 실행 완료
+- `wing_cylinder_rotating_U30_lam1p0` 메쉬 생성 완료
+- `wing_cylinder_rotating_U30_lam1p0` SU2 dry-run 통과
 
 ## 최근 계산 결과
 
@@ -163,13 +168,25 @@ MARS_project/
 - 수렴 상태: `ITER = 200` 제한 도달, `rms[Rho] = -5.99611`, 목표 `-8`에는 미수렴
 - 마지막 주요 계수: `DRAG = -0.18577`, `LIFT = 0.02245`
 
+- 케이스: `wing_cylinder_static_U30`
+- Solver: SU2 v8.5.0, Euler
+- SU2 실행 결과: 정상 종료, `history.csv`, `restart.dat`, `flow.vtu`, `surface_flow.vtu` 생성
+- 수렴 상태: `ITER = 200` 제한 도달, `rms[Rho] = -5.45736`, 목표 `-8`에는 미수렴
+- 마지막 주요 계수: `DRAG = -0.31027`, `LIFT = 0.40834`
+
+- 케이스: `wing_cylinder_rotating_U30_lam1p0`
+- 상태: SU2 mesh 생성 및 dry-run 통과
+- 회전 조건 메타데이터: `lambda = 1.0`, `omega = 1500 rad/s`, `RPM = 14323.94`
+- 주의: 현재 Euler 템플릿은 회전벽 물리를 반영하지 않으므로 이 케이스는 아직 계산 비교용이 아니라 설정/마커 검증용이다.
+
 이 계산은 물리 결론용이 아니라 geometry/mesh/marker/config/solver I/O 파이프라인 검증용이다.
 
 ## 아직 하지 않은 일
 
 - rotating wall 또는 moving wall 조건 검증
-- static cylinder 및 rotating cylinder 케이스 메쉬 생성
-- cylinder 포함 케이스 SU2 dry-run 및 단기 계산 실행
+- `wing_cylinder_rotating_U30_lam2p0` 메쉬 생성 및 dry-run
+- viscous 또는 RANS 기반 회전벽 템플릿 작성
+- moving ground 조건 설정 검증
 - Euler 검증 이후 점성/난류 조건 설정
 - 결과 후처리 코드 작성
 
