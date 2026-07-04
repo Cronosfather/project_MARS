@@ -1,0 +1,48 @@
+project:
+  name: MARS_3d_rotating_cylinder_rear_wing
+
+geometry:
+  airfoil: NACA0012
+  inverted: true
+  chord_m: 0.30
+  span_m: 1.20
+  angle_of_attack_deg: 0.0
+  cylinder_radius_m: 0.02
+  cylinder_x_over_c: 0.08
+  cylinder_z_over_c: 0.10
+  ground_clearance_m: 0.20
+
+flow:
+  density_kg_m3: 1.225
+  viscosity_kg_ms: 1.7894e-5
+  initial_u_inf_m_s: 30.0
+  u_inf_sweep_m_s: [20.0, 30.0, 40.0]
+  lambda_sweep: [0.0, 0.5, 1.0, 1.5, 2.0]
+
+mesh:
+  farfield_upstream_m: 1.50
+  farfield_downstream_m: 3.00
+  farfield_side_m: 1.50
+  farfield_top_m: 1.50
+  base_size_m: 0.08
+  wing_size_m: 0.012
+  cylinder_size_m: 0.008
+
+cases:
+  initial:
+    - name: wing_only_U30
+      include_cylinder: false
+      lambda: null
+      u_inf_m_s: 30.0
+    - name: wing_cylinder_static_U30
+      include_cylinder: true
+      lambda: 0.0
+      u_inf_m_s: 30.0
+    - name: wing_cylinder_rotating_U30_lam1p0
+      include_cylinder: true
+      lambda: 1.0
+      u_inf_m_s: 30.0
+    - name: wing_cylinder_rotating_U30_lam2p0
+      include_cylinder: true
+      lambda: 2.0
+      u_inf_m_s: 30.0

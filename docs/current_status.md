@@ -7,7 +7,7 @@
 ## 현재 기준일
 
 - 정리일: 2026-07-04
-- 현재 단계: 문서 정리 완료, 계산용 코드와 격자는 아직 생성하지 않음
+- 현재 단계: 기본 계산 구조 작성 완료, `wing_only_U30` Gmsh/SU2 파이프라인 검증 계산 완료
 
 ## 현재 연구 방향
 
@@ -106,7 +106,7 @@ lambda = 0은 비회전 실린더 조건이다.
 
 ## 권장 폴더 구조
 
-아직 계산용 폴더와 코드는 생성하지 않았다. 다음 단계에서 아래 구조를 만들면 된다.
+기본 계산용 폴더와 초기 geometry 생성 코드는 생성했다. 현재 구조는 다음과 같다.
 
 ```text
 MARS_project/
@@ -127,7 +127,8 @@ MARS_project/
     generate_airfoil.py
     generate_geometry.py
     generate_cases.py
-    run_cases.py
+    generate_meshes.py
+    run_case.py
     postprocess.py
     plot_results.py
   results/
@@ -136,15 +137,40 @@ MARS_project/
     flowfields/
 ```
 
+현재 후처리 스크립트는 아직 작성 전이다. `geometry/generated/`의 `.geo`, `.su2`, `.msh`, 로그 파일과 `geometry/airfoils/inverted_NACA0012.dat`, `cases/` 내부 계산 결과는 스크립트로 재생성하는 산출물이다.
+
+## 완료한 일
+
+- 프로젝트 기본 폴더 구조 생성
+- `config/project_config.yaml` 작성
+- NACA 0012 좌표 생성 코드 `scripts/generate_airfoil.py` 작성
+- Gmsh geometry 생성 코드 `scripts/generate_geometry.py` 작성
+- 초기 4개 케이스용 `.geo` 파일 생성 테스트
+- SU2 Euler 검증용 템플릿 `config/su2_template.cfg` 작성
+- SU2 케이스 생성 코드 `scripts/generate_cases.py` 작성
+- Gmsh `.geo`에서 SU2 `.su2` 메쉬를 생성하는 코드 `scripts/generate_meshes.py` 작성
+- 단일 케이스 실행 코드 `scripts/run_case.py` 작성
+- `wing_only_U30` 메쉬 생성 완료
+- `wing_only_U30` SU2 dry-run 통과
+- `wing_only_U30` SU2 Euler 200 iteration 실행 완료
+
+## 최근 계산 결과
+
+- 케이스: `wing_only_U30`
+- Solver: SU2 v8.5.0, Euler
+- Mesh: `123372` nodes, `770351` elements
+- SU2 실행 결과: 정상 종료, `history.csv`, `restart.dat`, `flow.vtu`, `surface_flow.vtu` 생성
+- 수렴 상태: `ITER = 200` 제한 도달, `rms[Rho] = -5.99611`, 목표 `-8`에는 미수렴
+- 마지막 주요 계수: `DRAG = -0.18577`, `LIFT = 0.02245`
+
+이 계산은 물리 결론용이 아니라 geometry/mesh/marker/config/solver I/O 파이프라인 검증용이다.
+
 ## 아직 하지 않은 일
 
-- NACA 0012 좌표 생성 코드 작성
-- Gmsh 3D geometry template 작성
-- wing only mesh 생성
-- cylinder 포함 geometry 생성
-- SU2 config template 작성
 - rotating wall 또는 moving wall 조건 검증
-- 단일 케이스 계산 실행
+- static cylinder 및 rotating cylinder 케이스 메쉬 생성
+- cylinder 포함 케이스 SU2 dry-run 및 단기 계산 실행
+- Euler 검증 이후 점성/난류 조건 설정
 - 결과 후처리 코드 작성
 
 ## 다음 작업 지시용 문장
@@ -152,7 +178,7 @@ MARS_project/
 새 대화에서 바로 이어가려면 다음처럼 요청하면 된다.
 
 ```text
-docs/current_status.md 읽고, 다음 단계인 프로젝트 기본 폴더 구조와 NACA 0012 기반 3D finite wing geometry 생성 코드부터 만들어줘.
+docs/current_status.md 읽고, 다음 단계인 cylinder 포함 케이스 메쉬 생성, SU2 dry-run, 그리고 rotating wall/moving ground 조건 검증부터 진행해줘.
 ```
 
 ## 주의할 점

@@ -3,9 +3,18 @@ __pycache__/
 *.py[cod]
 
 # CFD/generated outputs
-cases/
-results/
-geometry/generated/
+cases/*
+!cases/.gitkeep
+results/*
+!results/.gitkeep
+!results/figures/
+results/figures/*
+!results/figures/.gitkeep
+!results/flowfields/
+results/flowfields/*
+!results/flowfields/.gitkeep
+geometry/generated/*
+!geometry/generated/.gitkeep
 
 # Solver and mesh outputs
 *.su2
@@ -15,6 +24,7 @@ geometry/generated/
 *.csv
 *.log
 *.dat
+*.pos
 
 # OS/editor files
 .DS_Store
