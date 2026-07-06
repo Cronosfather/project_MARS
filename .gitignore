@@ -19,6 +19,8 @@ cases_rans_long_10000/*
 !cases_rans_long_10000/.gitkeep
 cases_urans_smoke/*
 !cases_urans_smoke/.gitkeep
+cases_urans_visualization/*
+!cases_urans_visualization/.gitkeep
 results/*
 !results/.gitkeep
 !results/*.csv
@@ -41,6 +43,7 @@ geometry/generated/*
 *.log
 *.dat
 *.pos
+*.pvd
 
 # OS/editor files
 .DS_Store
