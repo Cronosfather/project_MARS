@@ -19,6 +19,9 @@ ground_z = {ground_z_m};
 base_size = {base_size_m};
 wing_size = {wing_size_m};
 cyl_size = {cylinder_size_m};
+near_wall_size = {near_wall_size_m};
+ground_refine_size = {ground_refine_size_m};
+wake_refine_size = {wake_refine_size_m};
 
 // Domain: x streamwise, y spanwise, z vertical.
 Box(1) = {-upstream, -half_span - side, ground_z,
@@ -35,14 +38,16 @@ Extrude {0, span, 0} {
   Surface{12002};
 }
 
-wing_volume() = Volume In BoundingBox {-1e-6, -1e-6, -1.0, chord + 1e-6, span + 1e-6, 1.0};
+wing_volume() = Volume In BoundingBox {{airfoil_x_min_m} - 1e-5, -1e-6, {airfoil_z_min_m} - 1e-5,
+                                       {airfoil_x_max_m} + 1e-5, span + 1e-6, {airfoil_z_max_m} + 1e-5};
 
 {cylinder_block}
 
 fluid() = BooleanDifference{ Volume{1}; Delete; }{ Volume{wing_volume()}; {cylinder_boolean_volume} Delete; };
 
 Physical Volume("fluid") = {fluid()};
-Physical Surface("wing") = Surface In BoundingBox {-1e-6, -1e-6, -1.0, chord + 1e-6, span + 1e-6, 1.0};
+Physical Surface("wing") = Surface In BoundingBox {{airfoil_x_min_m} - 1e-5, -1e-6, {airfoil_z_min_m} - 1e-5,
+                                                   {airfoil_x_max_m} + 1e-5, span + 1e-6, {airfoil_z_max_m} + 1e-5};
 {cylinder_physical_surface}
 Physical Surface("inlet") = Surface In BoundingBox {-upstream - 1e-6, -half_span - side - 1e-6, ground_z - 1e-6,
                                                     -upstream + 1e-6, half_span + side + 1e-6, top + 1e-6};
@@ -56,6 +61,8 @@ Physical Surface("side_ymin") = Surface In BoundingBox {-upstream - 1e-6, -half_
                                                         chord + downstream + 1e-6, -half_span - side + 1e-6, top + 1e-6};
 Physical Surface("side_ymax") = Surface In BoundingBox {-upstream - 1e-6, half_span + side - 1e-6, ground_z - 1e-6,
                                                         chord + downstream + 1e-6, half_span + side + 1e-6, top + 1e-6};
+
+{refinement_field_block}
 
 Mesh.CharacteristicLengthMin = cyl_size;
 Mesh.CharacteristicLengthMax = base_size;

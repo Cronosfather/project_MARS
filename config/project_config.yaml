@@ -2,7 +2,7 @@ project:
   name: MARS_3d_rotating_cylinder_rear_wing
 
 geometry:
-  airfoil: NACA0012
+  airfoil: NACA6412
   inverted: true
   chord_m: 0.30
   span_m: 1.20
@@ -27,22 +27,93 @@ mesh:
   base_size_m: 0.08
   wing_size_m: 0.012
   cylinder_size_m: 0.008
+  near_wall_size_m: 0.006
+  ground_refine_size_m: 0.015
+  wake_refine_size_m: 0.020
 
 cases:
   initial:
-    - name: wing_only_U30
+    - name: inv6412_wing_only_U30
       include_cylinder: false
       lambda: null
       u_inf_m_s: 30.0
-    - name: wing_cylinder_static_U30
+    - name: inv6412_wing_cylinder_static_U30
       include_cylinder: true
       lambda: 0.0
       u_inf_m_s: 30.0
-    - name: wing_cylinder_rotating_U30_lam1p0
+    - name: inv6412_wing_cylinder_rotating_U30_lam1p0
       include_cylinder: true
       lambda: 1.0
       u_inf_m_s: 30.0
-    - name: wing_cylinder_rotating_U30_lam2p0
+    - name: inv6412_wing_cylinder_rotating_U30_lam2p0
       include_cylinder: true
       lambda: 2.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_U30_lamneg1p0
+      include_cylinder: true
+      lambda: -1.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_U30_lamneg2p0
+      include_cylinder: true
+      lambda: -2.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_x0p020_z0p100_U30_lam1p0
+      include_cylinder: true
+      cylinder_x_over_c: 0.02
+      cylinder_z_over_c: 0.10
+      lambda: 1.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_x0p050_z0p100_U30_lam1p0
+      include_cylinder: true
+      cylinder_x_over_c: 0.05
+      cylinder_z_over_c: 0.10
+      lambda: 1.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_x0p120_z0p100_U30_lam1p0
+      include_cylinder: true
+      cylinder_x_over_c: 0.12
+      cylinder_z_over_c: 0.10
+      lambda: 1.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_x0p160_z0p100_U30_lam1p0
+      include_cylinder: true
+      cylinder_x_over_c: 0.16
+      cylinder_z_over_c: 0.10
+      lambda: 1.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_x0p000_z0p100_U30_lam1p0
+      include_cylinder: true
+      cylinder_x_over_c: 0.00
+      cylinder_z_over_c: 0.10
+      lambda: 1.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_x0p010_z0p100_U30_lam1p0
+      include_cylinder: true
+      cylinder_x_over_c: 0.01
+      cylinder_z_over_c: 0.10
+      lambda: 1.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_x0p030_z0p100_U30_lam1p0
+      include_cylinder: true
+      cylinder_x_over_c: 0.03
+      cylinder_z_over_c: 0.10
+      lambda: 1.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_x0p040_z0p100_U30_lam1p0
+      include_cylinder: true
+      cylinder_x_over_c: 0.04
+      cylinder_z_over_c: 0.10
+      lambda: 1.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_x0p020_z0p080_U30_lam1p0
+      include_cylinder: true
+      cylinder_x_over_c: 0.02
+      cylinder_z_over_c: 0.08
+      lambda: 1.0
+      u_inf_m_s: 30.0
+    - name: inv6412_wing_cylinder_rotating_x0p020_z0p120_U30_lam1p0
+      include_cylinder: true
+      cylinder_x_over_c: 0.02
+      cylinder_z_over_c: 0.12
+      lambda: 1.0
       u_inf_m_s: 30.0

@@ -22,12 +22,15 @@
 
 ### 기본 리어윙
 
-- Airfoil: inverted NACA 0012 또는 이에 준하는 대칭 airfoil
+- 검증용 Airfoil: inverted NACA 0012
+- 성능 평가용 Airfoil: inverted NACA 6412
 - Chord length: 0.30 m
 - Span: 1.20 m를 우선 사용
 - Aspect ratio: 4.0
 - Angle of attack: 고정값 1개로 시작하며, 초기값은 별도 검토 후 확정
 - Endplate: 초기 해석에서는 제외, 후속 확장 항목으로 둠
+
+NACA0012는 대칭 익형이므로 회전 실린더 효과와 계산 파이프라인을 검증하기 위한 baseline으로 사용한다. 최종 성능 비교는 다운포스 목적에 더 자연스러운 cambered airfoil인 inverted NACA6412를 기본으로 진행한다.
 
 ### 회전 실린더
 

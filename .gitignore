@@ -5,6 +5,18 @@ __pycache__/
 # CFD/generated outputs
 cases/*
 !cases/.gitkeep
+cases_rans/*
+!cases_rans/.gitkeep
+cases_rans_200/*
+!cases_rans_200/.gitkeep
+cases_rans_refined_50/*
+!cases_rans_refined_50/.gitkeep
+cases_rans_refined_200/*
+!cases_rans_refined_200/.gitkeep
+cases_rans_stable_300/*
+!cases_rans_stable_300/.gitkeep
+cases_rans_long_10000/*
+!cases_rans_long_10000/.gitkeep
 results/*
 !results/.gitkeep
 !results/figures/

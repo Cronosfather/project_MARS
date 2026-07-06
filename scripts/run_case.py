@@ -15,11 +15,12 @@ SU2_CFD = shutil.which("SU2_CFD") or "/home/ragnarok/opt/su2/bin/SU2_CFD"
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("case", help="Case directory name under cases/")
+    parser.add_argument("--case-dir", default="cases")
     parser.add_argument("--dry-run", action="store_true", help="Only run SU2 preprocessing checks")
     parser.add_argument("--threads", type=int, default=4)
     args = parser.parse_args()
 
-    case_dir = ROOT / "cases" / args.case
+    case_dir = ROOT / args.case_dir / args.case
     cfg = case_dir / "config.cfg"
     if not cfg.exists():
         raise FileNotFoundError(f"Missing case config: {cfg}")
