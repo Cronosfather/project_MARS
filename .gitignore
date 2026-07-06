@@ -17,8 +17,11 @@ cases_rans_stable_300/*
 !cases_rans_stable_300/.gitkeep
 cases_rans_long_10000/*
 !cases_rans_long_10000/.gitkeep
+cases_urans_smoke/*
+!cases_urans_smoke/.gitkeep
 results/*
 !results/.gitkeep
+!results/*.csv
 !results/figures/
 results/figures/*
 !results/figures/.gitkeep
@@ -34,6 +37,7 @@ geometry/generated/*
 *.vtk
 *.vtu
 *.csv
+!results/*.csv
 *.log
 *.dat
 *.pos

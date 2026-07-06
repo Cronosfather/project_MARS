@@ -85,3 +85,28 @@ lambda = +1.0
 - refined mesh를 최종 boundary-layer mesh라고 표현하지 않는다.
 - stable 300 결과를 긍정 성능 결론으로 해석하지 않는다.
 - 자동차 전체 공력 성능으로 과장해서 표현하지 않는다.
+## 2026-07-06 update: 500-iteration long-run checkpoint
+
+The first 10000-iteration steady RANS candidate run was started for
+`inv6412_wing_cylinder_rotating_x0p020_z0p100_U30_lam1p0` and stopped after the
+500-iteration restart checkpoint was written.
+
+Checkpoint summary:
+
+```text
+last recorded iteration = 525
+rms[Rho]                = -3.327018
+CL                      = -6.653672
+CD                      = -0.539330
+C_DF                    =  6.653672
+last-50-row Delta CL    =  1.810160
+last-50-row Delta C_DF  = -1.810160
+```
+
+Decision:
+
+1. Do not treat this as a converged performance result.
+2. Do not launch broad 3D steady-RANS sweeps yet.
+3. Keep the `restart.dat` checkpoint, but pause blind continuation to 10000 iterations.
+4. Move the next research step to URANS setup or a simpler 2D/quasi-2D rotating-cylinder validation case.
+5. Use the simplified case to verify rotation convention, torque sign, force averaging, and expected Magnus behavior before returning to expensive 3D runs.
