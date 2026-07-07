@@ -21,6 +21,8 @@ cases_urans_smoke/*
 !cases_urans_smoke/.gitkeep
 cases_urans_visualization/*
 !cases_urans_visualization/.gitkeep
+cases_urans_production/*
+!cases_urans_production/.gitkeep
 results/*
 !results/.gitkeep
 !results/*.csv
@@ -44,6 +46,7 @@ geometry/generated/*
 *.dat
 *.pos
 *.pvd
+URANS_paraview_movie.*.png
 
 # OS/editor files
 .DS_Store
