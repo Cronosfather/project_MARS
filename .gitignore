@@ -46,6 +46,7 @@ geometry/generated/*
 *.dat
 *.pos
 *.pvd
+*.pid
 URANS_paraview_movie.*.png
 
 # OS/editor files

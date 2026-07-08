@@ -106,6 +106,12 @@ Next command for the first long URANS run:
 wsl bash -lc "cd /mnt/d/RAGNAROK/3_ing/MARS_project && python3 scripts/run_case.py inv6412_wing_cylinder_rotating_x0p020_z0p100_U30_lam1p0 --case-dir cases_urans_production --threads 4"
 ```
 
+Equivalent WSL script:
+
+```text
+wsl bash -lc "cd /mnt/d/RAGNAROK/3_ing/MARS_project && bash scripts/run_urans_production_candidate.sh"
+```
+
 Expected runtime is much longer than the 20-step visualization run. Start it as a deliberate long/batch job, then postprocess with:
 
 ```text
