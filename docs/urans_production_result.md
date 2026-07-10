@@ -121,6 +121,52 @@ Interpretation:
 - Because the run stopped at `Time_Iter = 447`, repeat or continue this case if
   a strict clean-baseline table is required.
 
+## Wing-Only Baseline Check
+
+The wing-only URANS baseline was run with the same production settings:
+
+```text
+inv6412_wing_only_U30
+```
+
+The run completed successfully:
+
+```text
+Maximum number of time iterations reached (TIME_ITER = 500).
+Exit Success (SU2_CFD)
+```
+
+Primary averaging window:
+
+```text
+Time_Iter = 250..499
+```
+
+Result:
+
+```text
+mean_CD                      =  0.107731
+mean_CL                      = -0.147733
+mean_C_DF                    =  0.147733
+std_C_DF                     =  0.103081
+mean_C_DF / abs(mean_CD)     =  1.371320
+last_rms[Rho]                = -6.219895
+```
+
+Late-window check:
+
+| Window | mean_CD | mean_C_DF | std_C_DF | mean_C_DF / abs(mean_CD) |
+|---|---:|---:|---:|---:|
+| 400..499 | 0.106653 | 0.153903 | 0.016722 | 1.443018 |
+
+Interpretation:
+
+- The wing-only baseline is the cleanest of the three production runs by
+  residual level and late-window force stability.
+- The wing alone produces modest positive downforce.
+- This baseline is now the main reference for deciding whether the rotating
+  cylinder adds enough downforce to justify its power requirement.
+
 ## Current Comparison
 
 Using the primary averaging windows available now:
@@ -129,25 +175,42 @@ Using the primary averaging windows available now:
 |---|---:|---|---:|---:|---:|---:|---:|
 | rotating candidate | 500 | 250..499 | -1.120963 | 1.646654 | 0.170976 | 227424 W | 0.041875 |
 | static cylinder | 448 | 250..447 | 0.338587 | 0.049654 | 0.181802 | 0 W | 0.146650 |
+| wing-only | 500 | 250..499 | 0.107731 | 0.147733 | 0.103081 | n/a | n/a |
+
+Late-window comparison:
+
+| Case | Steps | Window | mean_CD | mean_C_DF | std_C_DF | mean_C_DF / abs(mean_CD) |
+|---|---:|---|---:|---:|---:|---:|
+| rotating candidate | 500 | 400..499 | -1.142236 | 1.666811 | 0.052572 | 1.459253 |
+| static cylinder | 448 | 400..447 | 0.331295 | -0.021945 | 0.003312 | -0.066239 |
+| wing-only | 500 | 400..499 | 0.106653 | 0.153903 | 0.016722 | 1.443018 |
 
 This comparison supports the qualitative result that the powered rotating
-cylinder produces much more downforce than the static cylinder. It does not yet
-complete the research comparison because the wing-only URANS baseline is still
-missing and the static-cylinder run did not reach the nominal 500-step stop.
+cylinder produces much more downforce than both the static-cylinder and
+wing-only baselines. However, the rotating case requires roughly
+`227-233 kW` of estimated motor power in these averaging windows. Therefore the
+result should be described as a strong downforce gain with a large actuation
+power cost, not as a free aerodynamic efficiency improvement.
 
 ## Research Judgment
 
-This is the first usable URANS comparison between the rotating candidate and a
-static-cylinder baseline. It is not yet a complete comparison, because the
-wing-only URANS baseline still needs to be run with the same settings.
+This is the first usable URANS production comparison across rotating cylinder,
+static cylinder, and wing-only baselines.
 
-Next required comparison cases:
+Current defensible conclusion:
 
-```text
-inv6412_wing_only_U30
-```
+- The selected rotating-cylinder candidate substantially increases downforce
+  relative to both baselines.
+- The static cylinder by itself does not improve the wing in the late-window
+  production result.
+- The wing-only baseline is numerically cleaner than the cylinder cases and
+  provides the best reference for final reporting.
+- The rotating-cylinder benefit is tied to a large motor-power requirement, so
+  the final objective should report both downforce gain and power-corrected net
+  efficiency.
 
-After wing-only is averaged with the same method, the rotating cylinder can be
-judged against both proper URANS baselines. If the final report requires strict
-run parity, rerun or continue the static-cylinder case to a clean 500-step
-completion before finalizing the table.
+Remaining caveat:
+
+- The static-cylinder case stopped at `Time_Iter = 447`, not the nominal
+  500-step end. If strict run parity is required, rerun or continue static
+  cylinder to a clean 500-step completion before freezing the final table.
